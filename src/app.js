@@ -51,9 +51,9 @@ app.hooks(appHooks);
 //temp
 const routines = app.service('/routine');
 
-Promise.all([
-  routines.create({ name: 'Chest and Triceps' }),
-  routines.create({ name: 'Back and Biceps' })
-])
+//Promise.all([
+//  routines.create({ name: 'Chest and Triceps' }),
+//  routines.create({ name: 'Back and Biceps' })
+//])
 
 module.exports = app;
