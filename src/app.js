@@ -50,7 +50,4 @@ app.use(handler());
 
 app.hooks(appHooks);
 
-
-
-
 module.exports = app;
