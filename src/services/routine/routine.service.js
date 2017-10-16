@@ -1,5 +1,5 @@
 // Initializes the `routine` service on path `/routine`
-const createService = require('feathers-nedb');
+const createService = require('feathers-mongoose');
 const createModel = require('../../models/routine.model');
 const hooks = require('./routine.hooks');
 const filters = require('./routine.filters');
