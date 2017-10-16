@@ -7,8 +7,8 @@
     {
         "type": "node",
         "request": "launch",
-        "name": "Launch Program",
-        "program": "${workspaceRoot}/src/initapp.js"
+        "name": "Launch App",
+        "program": "${workspaceRoot}/src/index.js"
     },
         {
             "type": "node",
