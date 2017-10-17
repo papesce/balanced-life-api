@@ -57,6 +57,8 @@ server.get(/\/?.*/, restify.serveStatic({
             match: /^((?!index.js).)*$/   // we should deny access to the application source
      }));
 
-server.listen(5000, function () {
-    console.log('%s listening at %s', server.name, server.url);
+var port = process.env.PORT || 5000;
+
+server.listen(port, function () {
+    console.log('%s listening at %s', server.name, port);
 });
