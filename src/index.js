@@ -1,25 +1,44 @@
 /* eslint-disable no-console */
-const logger = require('winston');
-const app = require('./app');
-const port = app.get('port');
-const server = app.listen(port);
+var express = require('express'),
+    bodyParser = require('body-parser'),
+    methodOverride = require('method-override'),
+    morgan = require('morgan'),
+    restful = require('node-restful'),
+    mongoose = restful.mongoose;
+var app = express();
 
-process.on('unhandledRejection', (reason, p) =>
-  logger.error('Unhandled Rejection at: Promise ', p, reason)
-);
+app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({'extended':'true'}));
+app.use(bodyParser.json());
+app.use(bodyParser.json({type:'application/vnd.api+json'}));
+app.use(methodOverride());
 
-server.on('listening', () => {
-  logger.info('Feathers application started on http://%s:%d', app.get('host'), port);
-  const routineService = app.service('routine');
-  
+mongoose.connect("mongodb://localhost:27017/balanced_gym_api");
+
+var ExerciseSchema  =  mongoose.Schema({
+    name: String,
+  });
+
+var ExerciseModel = restful.model('exercise', ExerciseSchema);
+
+var RoutineSchema = mongoose.Schema({
+    name: String,
+    exercises: [ExerciseSchema]
+  })
+
+var RoutineModel  = restful.model('routine', RoutineSchema )
+  .methods(['get', 'post', 'put', 'delete']);
+
+//init database:
+var e = new ExerciseModel({name: "new excercise"});
+e.save();
+var r = new RoutineModel({name: "demo", exercises: [e]});
+r.save();
 
 
-  routineService.get('59e4c109c1d9dcfb4e7c31b9').then( 
-      (res) => {
-        logger.info('resource found');
-      }
-    );
 
-});
+RoutineModel.register(app, '/routine');
+
+app.listen(3000);
 
 
