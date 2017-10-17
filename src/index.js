@@ -54,7 +54,7 @@ server.del('/exercise/:id', exercise.remove());
 server.get(/\/?.*/, restify.serveStatic({
             directory: __dirname,
             default: '../public/index.html',
-            match: /^((?!app.js).)*$/   // we should deny access to the application source
+            match: /^((?!index.js).)*$/   // we should deny access to the application source
      }));
 
 server.listen(5000, function () {
