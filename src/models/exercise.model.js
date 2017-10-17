@@ -2,14 +2,26 @@
 // 
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
-module.exports = function (app) {
-  const mongooseClient = app.get('mongooseClient');
-  const { Schema } = mongooseClient;
-  const exercise = new Schema({
-    name: { type: String, required: true }
-  }, {
-    timestamps: true
-  });
+var mongoose = require('mongoose');
 
-  return mongooseClient.model('exercise', exercise);
+var exerciseSchema = new mongoose.Schema({
+    name : { type : String, required : true },
+   }, {timestamps: true});
+
+var exerciseModel = mongoose.model('exercise', exerciseSchema);
+
+class Exercise {
+
+// Create a simple mongoose model 'Note' 
+ static getModel() {
+   return exerciseModel;
+ }
+
+ static getSchema() {
+   return exerciseSchema;
+ }
+  
 };
+
+
+module.exports = Exercise;

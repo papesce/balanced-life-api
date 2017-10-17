@@ -5,7 +5,7 @@
   "homepage": "",
   "main": "src",
   "keywords": [
-    "feathers"
+    ""
   ],
   "author": {
     "name": "Pablo Pesce",
@@ -13,14 +13,6 @@
   },
   "contributors": [],
   "bugs": {},
-  "directories": {
-    "lib": "src",
-    "test": "test/"
-  },
-  "engines": {
-    "node": ">= 6.0.0",
-    "npm": ">= 3.0.0"
-  },
   "scripts": {
     "test": "npm run eslint && npm run mocha",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
@@ -28,11 +20,7 @@
     "mocha": "mocha test/ --recursive --exit"
   },
   "dependencies": {
-    "express": "^4.16.2",
-    "method-override": "^2.3.10",
-    "mongoose": "^4.12.3",
-    "morgan": "^1.9.0",
-    "node-restful": "^0.2.6"
+    "restify-mongoose": "^2.0.1"
   },
   "devDependencies": {}
 }
