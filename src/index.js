@@ -7,13 +7,13 @@ let routineModel = require('./models/routine.model.js');
 let gymModel = require('./models/gym.model.js');
 
 
-//mongoose.connect('mongodb://localhost:27017/balanced_gym_api')
-mongoose.connect('mongodb://papesce:yt73M44VwTohpPCH'+
-'@balancedcluster-shard-00-00-wamq8.mongodb.net:27017'+
-',balancedcluster-shard-00-01-wamq8.mongodb.net:27017'+
-',balancedcluster-shard-00-02-wamq8.mongodb.net:27017'+
-'/balanced_gym_api?ssl=true'+
-'&replicaSet=BalancedCluster-shard-0&authSource=admin');
+mongoose.connect('mongodb://localhost:27017/balanced_gym_api')
+// mongoose.connect('mongodb://papesce:yt73M44VwTohpPCH'+
+// '@balancedcluster-shard-00-00-wamq8.mongodb.net:27017'+
+// ',balancedcluster-shard-00-01-wamq8.mongodb.net:27017'+
+// ',balancedcluster-shard-00-02-wamq8.mongodb.net:27017'+
+// '/balanced_gym_api?ssl=true'+
+// '&replicaSet=BalancedCluster-shard-0&authSource=admin');
 
 var server = restify.createServer({
     name: 'restify.mongoose.balancedlife',

@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 
 var exerciseSchema = new mongoose.Schema({
     name : { type : String, required : true },
+    series: [{reps: Number, weight: Number}] 
    }, {timestamps: true});
 
 var exerciseModel = mongoose.model('exercise', exerciseSchema);

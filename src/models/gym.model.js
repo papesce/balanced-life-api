@@ -19,9 +19,11 @@ class Gym {
      static connectModels(exName1, exName2, roName) {
          let ExerciseModel = exercise.getModel();
          let RoutineModel = routine.getModel();
-        new ExerciseModel({name: exName1}).save().then(
+        new ExerciseModel({name: exName1,
+                        series: [{reps:10, weight:1}]}).save().then(
           (saved1) => {
-         new ExerciseModel({name: exName2}).save().then(
+         new ExerciseModel({name: exName2,
+                        series: [{reps:10, weight:1}]}).save().then(
           (saved2) => {  
               new RoutineModel({
                   name: roName,
