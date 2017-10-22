@@ -4,6 +4,7 @@ var restifyMongoose = require('restify-mongoose');
 var mongoose = require('mongoose');
 let exerciseModel = require('./models/exercise.model.js');
 let routineModel = require('./models/routine.model.js');
+let serieModel = require('./models/serie.model.js');
 let gymModel = require('./models/gym.model.js');
 
 
@@ -46,6 +47,16 @@ server.post('/exercise', exercise.insert());
 server.patch('/exercise/:id', exercise.update());
 server.del('/exercise/:id', exercise.remove());
 
+
+// Now create a restify-mongoose resource from 'Note' mongoose model 
+var serie = restifyMongoose(serieModel.getModel());
+ 
+// Serve resource notes with fine grained mapping control 
+server.get('/serie', exercise.query());
+server.get('/serie/:id', exercise.detail());
+server.post('/serie', exercise.insert());
+server.patch('/serie/:id', exercise.update());
+server.del('/serie/:id', exercise.remove());
 
 //initialize the model
 //gymModel.initializeModels();
