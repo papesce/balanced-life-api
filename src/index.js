@@ -31,7 +31,7 @@ var routine = restifyMongoose(routineModel.getModel());
  
 // Serve resource notes with fine grained mapping control 
 server.get('/routine', routine.query({populate: "exercises"}));
-server.get('/routine/:id', routine.detail());
+server.get('/routine/:id', routine.detail({populate: "exercises"}));
 server.post('/routine', routine.insert());
 server.patch('/routine/:id', routine.update());
 server.del('/routine/:id', routine.remove());
@@ -41,7 +41,7 @@ server.del('/routine/:id', routine.remove());
 var exercise = restifyMongoose(exerciseModel.getModel());
  
 // Serve resource notes with fine grained mapping control 
-server.get('/exercise', exercise.query());
+server.get('/exercise', exercise.query({populate: "series"}));
 server.get('/exercise/:id', exercise.detail());
 server.post('/exercise', exercise.insert());
 server.patch('/exercise/:id', exercise.update());
