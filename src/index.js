@@ -5,16 +5,16 @@ var mongoose = require('mongoose');
 let exerciseModel = require('./models/exercise.model.js');
 let routineModel = require('./models/routine.model.js');
 let serieModel = require('./models/serie.model.js');
-let gymModel = require('./models/gym.model.js');
+let GymModel = require('./models/gym.model.js');
 
 
-// mongoose.connect('mongodb://localhost:27017/balanced_gym_api')
-mongoose.connect('mongodb://papesce:yt73M44VwTohpPCH'+
-'@balancedcluster-shard-00-00-wamq8.mongodb.net:27017'+
-',balancedcluster-shard-00-01-wamq8.mongodb.net:27017'+
-',balancedcluster-shard-00-02-wamq8.mongodb.net:27017'+
-'/balanced_gym_api?ssl=true'+
-'&replicaSet=BalancedCluster-shard-0&authSource=admin');
+ mongoose.connect('mongodb://localhost:27017/balanced_gym_api')
+// mongoose.connect('mongodb://papesce:yt73M44VwTohpPCH'+
+// '@balancedcluster-shard-00-00-wamq8.mongodb.net:27017'+
+// ',balancedcluster-shard-00-01-wamq8.mongodb.net:27017'+
+// ',balancedcluster-shard-00-02-wamq8.mongodb.net:27017'+
+// '/balanced_gym_api?ssl=true'+
+// '&replicaSet=BalancedCluster-shard-0&authSource=admin');
 
 var server = restify.createServer({
     name: 'restify.mongoose.balancedlife',
@@ -57,9 +57,17 @@ server.get('/serie/:id', serie.detail());
 server.post('/serie', serie.insert());
 server.patch('/serie/:id', serie.update());
 server.del('/serie/:id', serie.remove());
+server.post('/newSerie/:exerciseId', newSerie);
+
+let gym = new GymModel();
+
+async function newSerie(req, res, next) {
+    let serie = await gym.newSerie(req.params.exerciseId);
+    res.send(serie);
+}
 
 //initialize the model
-//gymModel.initializeModels();
+//gym.initializeModels();
 
 
 server.get(/\/?.*/, restify.serveStatic({

@@ -3,11 +3,10 @@
  let serie = require('./serie.model.js');
 
 class Gym {
-    static initializeModels() {
-        let gym = new Gym();
-        gym.connectModels("Bench Press","Triceps extensions", "Chest and Triceps");
-        gym.connectModels("Deadlift","Barbell Curls", "Back and Biceps");
-        gym.connectModels("Barbell Lunges","Shoulder Press", "Legs and Shoulders");
+    initializeModels() {
+        this.connectModels("Bench Press","Triceps extensions", "Chest and Triceps");
+        this.connectModels("Deadlift","Barbell Curls", "Back and Biceps");
+        this.connectModels("Barbell Lunges","Shoulder Press", "Legs and Shoulders");
     
 
     //   new exerciseModel({name: "Deadlift"}).save();
@@ -51,7 +50,18 @@ class Gym {
     //   let chestAndTriceps = new routineModel({name:"Chest and Triceps"});
     //   let LegsAndShoulders = new routineModel({name:"Legs and Shoulders"});
     // }
+
+    async newSerie(exerciseId) { 
+        let SerieModel = serie.getModel();
+        let newSerie = await new SerieModel({reps:10, weight:1}).save();
+        let ExerciseModel = exercise.getModel();
+        let ex = await ExerciseModel.findById(exerciseId).exec();
+        ex.series.push(newSerie);
+        await ex.save();   
+        return newSerie;
+    }
 }
+
 
 
 module.exports = Gym;
