@@ -52,11 +52,11 @@ server.del('/exercise/:id', exercise.remove());
 var serie = restifyMongoose(serieModel.getModel());
  
 // Serve resource notes with fine grained mapping control 
-server.get('/serie', exercise.query());
-server.get('/serie/:id', exercise.detail());
-server.post('/serie', exercise.insert());
-server.patch('/serie/:id', exercise.update());
-server.del('/serie/:id', exercise.remove());
+server.get('/serie', serie.query());
+server.get('/serie/:id', serie.detail());
+server.post('/serie', serie.insert());
+server.patch('/serie/:id', serie.update());
+server.del('/serie/:id', serie.remove());
 
 //initialize the model
 //gymModel.initializeModels();
