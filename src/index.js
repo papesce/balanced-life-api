@@ -42,7 +42,7 @@ var exercise = restifyMongoose(exerciseModel.getModel());
  
 // Serve resource notes with fine grained mapping control 
 server.get('/exercise', exercise.query({populate: "series"}));
-server.get('/exercise/:id', exercise.detail());
+server.get('/exercise/:id', exercise.detail({populate: "series"}));
 server.post('/exercise', exercise.insert());
 server.patch('/exercise/:id', exercise.update());
 server.del('/exercise/:id', exercise.remove());
