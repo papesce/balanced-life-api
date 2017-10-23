@@ -14,18 +14,18 @@ class Gym {
 
     async initializeRoutine1(ExerciseModel, RoutineModel, SerieModel) {
         let routineName = "Chest Triceps Forearms";
-        let routine = await this.createRoutine(RoutineModel, routineName);
-        //let routine = await this.getRoutine(RoutineModel, routineName);
-        await this.addExercise(routine, ExerciseModel, "Flat Barbell Bench Press");
-        await this.addExercise(routine, ExerciseModel, "Dumbbell Skull Crushers");
-        await this.addExercise(routine, ExerciseModel, "One Arm Dumbell Wrist Curls");
-        await this.addExercise(routine, ExerciseModel, "Incline Barbell Bench Press");
-        await this.addExercise(routine, ExerciseModel, "Dumbbell Extension (one arm in)");
-        await this.addExercise(routine, ExerciseModel, "One Arm Dumbell Reverse Wrist Curls");
-        await this.addExercise(routine, ExerciseModel, "Decline Barbell Bench Press");
-        await this.addExercise(routine, ExerciseModel, "Close grip bench press");
-        await this.addExercise(routine, ExerciseModel, "Reverse curls (short)");
-        await routine.save();
+        //let routine = await this.createRoutine(RoutineModel, routineName);
+        let routine = await this.getRoutine(RoutineModel, routineName);
+        //await this.addExercise(routine, ExerciseModel, "Flat Barbell Bench Press");
+        //await this.addExercise(routine, ExerciseModel, "Dumbbell Skull Crushers");
+        //await this.addExercise(routine, ExerciseModel, "One Arm Dumbell Wrist Curls");
+        //await this.addExercise(routine, ExerciseModel, "Incline Barbell Bench Press");
+        //await this.addExercise(routine, ExerciseModel, "Dumbbell Extension (one arm in)");
+        //await this.addExercise(routine, ExerciseModel, "One Arm Dumbell Reverse Wrist Curls");
+        //await this.addExercise(routine, ExerciseModel, "Decline Barbell Bench Press");
+        //await this.addExercise(routine, ExerciseModel, "Close grip bench press");
+        //await this.addExercise(routine, ExerciseModel, "Reverse curls (short)");
+        //await routine.save();
     }
 
     //    this.connectModels("Bench Press","Triceps extensions", );
