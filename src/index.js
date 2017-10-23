@@ -67,7 +67,7 @@ async function newSerie(req, res, next) {
 }
 
 //initialize the model
-//gym.initializeModels();
+gym.initializeModels();
 
 
 server.get(/\/?.*/, restify.serveStatic({
