@@ -24,6 +24,8 @@
     "mocha": "mocha test/ --recursive --exit"
   },
   "dependencies": {
+    "mongodb-backup": "^1.6.9",
+    "mongodb-restore": "^1.6.2",
     "restify-mongoose": "^2.0.1"
   },
   "devDependencies": {}

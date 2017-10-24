@@ -6,15 +6,20 @@ let exerciseModel = require('./models/exercise.model.js');
 let routineModel = require('./models/routine.model.js');
 let serieModel = require('./models/serie.model.js');
 let GymModel = require('./models/gym.model.js');
+let MongoDBUtils = require('./mongodbutils');
 
 
-// mongoose.connect('mongodb://localhost:27017/balanced_gym_api')
-mongoose.connect('mongodb://papesce:yt73M44VwTohpPCH'+
+var MONGODB_REMOTE_API =  'mongodb://papesce:yt73M44VwTohpPCH'+
 '@balancedcluster-shard-00-00-wamq8.mongodb.net:27017'+
 ',balancedcluster-shard-00-01-wamq8.mongodb.net:27017'+
 ',balancedcluster-shard-00-02-wamq8.mongodb.net:27017'+
 '/balanced_gym_api?ssl=true'+
-'&replicaSet=BalancedCluster-shard-0&authSource=admin');
+'&replicaSet=BalancedCluster-shard-0&authSource=admin';
+var MONGODB_LOCAL_API = 'mongodb://localhost:27017/balanced_gym_api';
+var MONGODB_API =  MONGODB_REMOTE_API;
+
+// mongoose.connect()
+mongoose.connect(MONGODB_API);
 
 var server = restify.createServer({
     name: 'restify.mongoose.balancedlife',
@@ -68,6 +73,9 @@ async function newSerie(req, res, next) {
 
 //initialize the model
 gym.initializeModels();
+
+//database backup/restore
+MongoDBUtils.backup(MONGODB_REMOTE_API);
 
 
 server.get(/\/?.*/, restify.serveStatic({
