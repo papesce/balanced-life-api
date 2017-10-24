@@ -75,7 +75,8 @@ async function newSerie(req, res, next) {
 gym.initializeModels();
 
 //database backup/restore
-MongoDBUtils.backup(MONGODB_REMOTE_API);
+//MongoDBUtils.backup(MONGODB_REMOTE_API);
+//MongoDBUtils.restore(MONGODB_REMOTE_API);
 
 
 server.get(/\/?.*/, restify.serveStatic({
