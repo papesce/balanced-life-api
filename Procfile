@@ -1,1 +1,1 @@
-web: node src/index.js
+web: babel-node src/ --presets es2017
