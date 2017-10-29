@@ -27,12 +27,17 @@ Getting up and running is as easy as 1, 2, 3.
 
 Simply run `npm test` and all your tests in the `test/` directory will be run.
 
-## Instaled packages
+## Installed packages
 npm install --save-dev babel-cli
 npm install --save-dev babel-preset-es2017
 npm install --save-dev nodemon
 
 npm install --save mongoose-deep-populate
+
+##Setup development
+$ npm config set save=true
+$ npm config set save-exact=true
+$ cat ~/.npmrc 
 
 ## Help
 

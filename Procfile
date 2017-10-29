@@ -1,1 +1,1 @@
-web: $(npm bin)/babel-node src/
+web: $(npm bin)/babel-node src/index.js

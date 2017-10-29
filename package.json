@@ -21,7 +21,7 @@
     "test": "npm run eslint && npm run mocha",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
     "watch": "nodemon --exec babel-node src/",
-    "start": "babel-node src/",
+    "start": "./node_modules/.bin/babel-node src/index.js",
     "mocha": "mocha test/ --recursive --exit"
   },
   "dependencies": {
