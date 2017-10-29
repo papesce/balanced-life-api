@@ -34,7 +34,11 @@ npm install --save-dev nodemon
 
 npm install --save mongoose-deep-populate
 
+npm install --save-dev mocha
+npm install --save-dev babel-register
+
 ##Setup development
+(from heroku)
 $ npm config set save=true
 $ npm config set save-exact=true
 $ cat ~/.npmrc 
