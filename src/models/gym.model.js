@@ -5,11 +5,11 @@
 class Gym {
     initializeModels() {
         let ExerciseModel = exercise.getModel();
-        let RoutineModel = routine.getModel();
+        let RoutineModel = new routine().getModel();
         let SerieModel = serie.getModel();
         //this.initializeRoutine1(ExerciseModel, RoutineModel, SerieModel);
-        this.initializeRoutine2(ExerciseModel, RoutineModel, SerieModel);
-        //this.initializeRoutine3(ExerciseModel, RoutineModel, SerieModel);
+        ///this.initializeRoutine2(ExerciseModel, RoutineModel, SerieModel);
+        this.initializeRoutine3(ExerciseModel, RoutineModel, SerieModel);
     }
 
     async initializeRoutine1(ExerciseModel, RoutineModel, SerieModel) {
@@ -32,15 +32,34 @@ class Gym {
         let routineName = "Legs Shoulders Cabs";
         //let routine = await this.createRoutine(RoutineModel, routineName);
         let routine = await this.getRoutine(RoutineModel, routineName);
-        await this.addExercise(routine, ExerciseModel, "Barbell Squats Long");
-        await this.addExercise(routine, ExerciseModel, "Standing Military Press (short)");
-        await this.addExercise(routine, ExerciseModel, "One Leg Dumbbell Raising Out");
-        await this.addExercise(routine, ExerciseModel, "Dumbel Lunges (alt)");
-        await this.addExercise(routine, ExerciseModel, "Standing Dumbbell Side Laterals");
-        await this.addExercise(routine, ExerciseModel, "One Leg Dumbbell Raising");
-        await this.addExercise(routine, ExerciseModel, "Stiff Legged Deadlift (long)");
-        await this.addExercise(routine, ExerciseModel, "Standing Dumbbell Front Raise (alt)");
-        await this.addExercise(routine, ExerciseModel, "One Leg Dumbbel Rasing In");
+        // await this.addExercise(routine, ExerciseModel, "Barbell Squats Long");
+        // await this.addExercise(routine, ExerciseModel, "Standing Military Press (short)");
+        // await this.addExercise(routine, ExerciseModel, "One Leg Dumbbell Raising Out");
+        // await this.addExercise(routine, ExerciseModel, "Dumbel Lunges (alt)");
+        // await this.addExercise(routine, ExerciseModel, "Standing Dumbbell Side Laterals");
+        // await this.addExercise(routine, ExerciseModel, "One Leg Dumbbell Raising");
+        // await this.addExercise(routine, ExerciseModel, "Stiff Legged Deadlift (long)");
+        // await this.addExercise(routine, ExerciseModel, "Standing Dumbbell Front Raise (alt)");
+        // await this.addExercise(routine, ExerciseModel, "One Leg Dumbbel Rasing In");
+        // await routine.save();
+    }
+
+    async initializeRoutine3(ExerciseModel, RoutineModel, SerieModel) {
+        let routineName = "Back Biceps Abs";
+        let routine = await this.createRoutine(RoutineModel, routineName);
+        //let routine = await this.getRoutine(RoutineModel, routineName);
+        await this.addExercise(routine, ExerciseModel, "Deadlift");
+        await this.addExercise(routine, ExerciseModel, "Barbell Curls (short)");
+        await this.addExercise(routine, ExerciseModel, "Raised Knee Barbell Crunches (short)");
+        await this.addExercise(routine, ExerciseModel, "One-Arm Dumbbell Rows");
+        await this.addExercise(routine, ExerciseModel, "Concentration curls");
+        await this.addExercise(routine, ExerciseModel, "Oblique Crunch with bench");
+        await this.addExercise(routine, ExerciseModel, "Bent Over Barbell Rows long (rev grip)");
+        await this.addExercise(routine, ExerciseModel, "Hammer Standing Dumbbell Curls");
+        await this.addExercise(routine, ExerciseModel, "Flat Bench Reverse crunch (knee up)");
+        await this.addExercise(routine, ExerciseModel, "Flat bench Leg Raises (hands down)");
+        await this.addExercise(routine, ExerciseModel, "Supinating Curl Standing");
+        await this.addExercise(routine, ExerciseModel, "Calves over bench sit ups (with dumbell)");
         await routine.save();
     }
    
@@ -67,10 +86,62 @@ class Gym {
         let ExerciseModel = exercise.getModel();
         let ex = await ExerciseModel.findById(exerciseId).exec();
         ex.series.push(newSerie);
+        ex.lastUpdated = newSerie.createdAt;
         await ex.save();   
         return newSerie;
     }
+
+    async getExercise(exerciseId) {
+        let ExerciseModel = exercise.getModel();
+        let exerciseQuery = ExerciseModel.findOne({_id : exerciseId}).
+        populate('series');
+
+        let exerciseResult = await exerciseQuery.lean().exec();
+        //sort({age:-1}).limit(1) 
+        if (exerciseResult.series.length > 0) {
+            exerciseResult.series.sort((s1,s2) => {return s1.createdAt < s2.createdAt});
+            exerciseResult.lastUpdated = exerciseResult.series[0].createdAt;
+        //} else {
+        //    exerciseResult.lastUpdated = exerciseResult.createdAt;
+        }
+        return exerciseResult;
+    }
+
+    async getRoutines() {
+         let RoutineModel = routine.getModel();
+         let routinesQuery = RoutineModel.find().
+         deepPopulate('exercises.series');
+         let routines = await routinesQuery.lean().exec();
+         for (let routineResult of routines) {
+            this.addLastUpdated(routineResult);
+         }
+    return routines;
+     }
+
+     async getRoutine(routineId) {
+        let RoutineModel = routine.getModel();
+        let routineQuery = RoutineModel.findOne({_id : routineId}).
+        deepPopulate('exercises.series');
+        let routineResult = await routineQuery.lean().exec();
+        this.addLastUpdated(routineResult);
+        return routineResult;
+    }
+
+
+    addLastUpdated(routineResult){
+        for (let exerciseResult of routineResult.exercises) {
+            if (exerciseResult.series.length > 0) {
+                exerciseResult.series.sort((s1,s2) => {return s1.createdAt < s2.createdAt});
+                exerciseResult.lastUpdated = exerciseResult.series[0].createdAt;
+                let newSeries = exerciseResult.series.map((serie) => serie._id);
+                exerciseResult.series = newSeries;
+            } else {
+                exerciseResult.lastUpdated = exerciseResult.createdAt;
+            }
+        }
+    }
 }
+
 
 
 

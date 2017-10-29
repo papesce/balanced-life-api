@@ -16,7 +16,7 @@ var MONGODB_REMOTE_API =  'mongodb://papesce:yt73M44VwTohpPCH'+
 '/balanced_gym_api?ssl=true'+
 '&replicaSet=BalancedCluster-shard-0&authSource=admin';
 var MONGODB_LOCAL_API = 'mongodb://localhost:27017/balanced_gym_api';
-var MONGODB_API =  MONGODB_REMOTE_API;
+var MONGODB_API =  MONGODB_LOCAL_API;
 
 // mongoose.connect()
 mongoose.connect(MONGODB_API);
@@ -35,47 +35,65 @@ server.use(restify.bodyParser());
 var routine = restifyMongoose(routineModel.getModel());
  
 // Serve resource notes with fine grained mapping control 
-server.get('/routine', routine.query({populate: "exercises"}));
-server.get('/routine/:id', routine.detail({populate: "exercises"}));
-server.post('/routine', routine.insert());
-server.patch('/routine/:id', routine.update());
-server.del('/routine/:id', routine.remove());
+//server.get('/routine', routine.query({populate: "exercises"}));
+server.get('/routine', getRoutines);
+//server.get('/routine/:id', routine.detail({populate: "exercises"}));
+server.get('/routine/:id', getRoutine);
+//server.post('/routine', routine.insert());
+//server.patch('/routine/:id', routine.update());
+//server.del('/routine/:id', routine.remove());
 
  
 // Now create a restify-mongoose resource from 'Note' mongoose model 
 var exercise = restifyMongoose(exerciseModel.getModel());
  
 // Serve resource notes with fine grained mapping control 
-server.get('/exercise', exercise.query({populate: "series"}));
-server.get('/exercise/:id', exercise.detail({populate: "series"}));
-server.post('/exercise', exercise.insert());
+//server.get('/exercise', exercise.query({populate: "series"}));
+//server.get('/exercise/:id', exercise.detail({populate: "series"}));
+server.get('/exercise/:id', getExercise);
+//server.post('/exercise', exercise.insert());
 server.patch('/exercise/:id', exercise.update());
-server.del('/exercise/:id', exercise.remove());
+//server.del('/exercise/:id', exercise.remove());
 
 
 // Now create a restify-mongoose resource from 'Note' mongoose model 
 var serie = restifyMongoose(serieModel.getModel());
  
 // Serve resource notes with fine grained mapping control 
-server.get('/serie', serie.query());
+//server.get('/serie', serie.query());
 server.get('/serie/:id', serie.detail());
-server.post('/serie', serie.insert());
+//server.post('/serie', serie.insert());
 server.patch('/serie/:id', serie.update());
 server.del('/serie/:id', serie.remove());
 server.post('/newSerie/:exerciseId', newSerie);
 
 let gym = new GymModel();
 
+async function getRoutines(req, res, next) {
+    let routines = await gym.getRoutines();
+    res.send(routines);
+}
+
+async function getRoutine(req, res, next) {
+    let routine = await gym.getRoutine(req.params.id);
+    res.send(routine);
+}
+
 async function newSerie(req, res, next) {
     let serie = await gym.newSerie(req.params.exerciseId);
     res.send(serie);
 }
 
+async function getExercise(req, res, next) {
+    let series = await gym.getExercise(req.params.id); 
+    res.send(series);  
+}
+
 //initialize the model
-gym.initializeModels();
+//gym.initializeModels();
 
 //database backup/restore
-//MongoDBUtils.backup(MONGODB_REMOTE_API);
+MongoDBUtils.backup(MONGODB_REMOTE_API);
 //MongoDBUtils.restore(MONGODB_REMOTE_API);
 
 
