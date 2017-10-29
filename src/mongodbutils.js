@@ -9,6 +9,7 @@ class MongoDBUtils {
 
     static backup(API) {
         //backup and restore DB
+        console.log(`backing up the database ${API}`);
         backup({
             uri: API, // mongodb://<dbuser>:<dbpassword>@<dbdomain>.mongolab.com:<dbport>/<dbdatabase> 
             root: __dirname + '/dbbackup',
