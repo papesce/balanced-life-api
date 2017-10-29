@@ -44,7 +44,7 @@ $ npm config set save-exact=true
 $ cat ~/.npmrc 
 
 ## Help
-
+git push heroku dev:master
 ## Changelog
 
 __0.1.0__
