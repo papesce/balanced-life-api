@@ -20,7 +20,8 @@
   "scripts": {
     "test": "npm run eslint && npm run mocha",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
-    "start": "nodemon --exec babel-node src/ --presets es2017",
+    "watch": "nodemon --exec babel-node src/ --presets es2017",
+    "start": "babel-node src/ --presets es2017",
     "mocha": "mocha test/ --recursive --exit"
   },
   "dependencies": {
