@@ -16,7 +16,9 @@ var MONGODB_REMOTE_API =  'mongodb://papesce:yt73M44VwTohpPCH'+
 '/balanced_gym_api?ssl=true'+
 '&replicaSet=BalancedCluster-shard-0&authSource=admin';
 var MONGODB_LOCAL_API = 'mongodb://localhost:27017/balanced_gym_api';
-var MONGODB_API =  MONGODB_REMOTE_API;
+//var MONGODB_API =  MONGODB_REMOTE_API;
+var MONGODB_API =  MONGODB_LOCAL_API;
+
 
 // mongoose.connect()
 mongoose.connect(MONGODB_API);

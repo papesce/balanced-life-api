@@ -119,6 +119,7 @@ class Gym {
      }
 
      async getRoutine(routineId) {
+         //bug fix case of routine not found
         let RoutineModel = routine.getModel();
         let routineQuery = RoutineModel.findOne({_id : routineId}).
         deepPopulate('exercises.series');

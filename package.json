@@ -8,8 +8,8 @@
     ""
   ],
   "engines": {
-    "node": ">= 8.0.0",
-    "npm": ">= 5.0.0"
+    "node": "6.15.5",
+    "npm": "3.10.10"
   },
   "author": {
     "name": "Pablo Pesce",

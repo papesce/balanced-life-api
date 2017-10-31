@@ -148,6 +148,7 @@ class Gym {
         var _this5 = this;
 
         return _asyncToGenerator(function* () {
+            //bug fix case of routine not found
             let RoutineModel = routine.getModel();
             let routineQuery = RoutineModel.findOne({ _id: routineId }).deepPopulate('exercises.series');
             let routineResult = yield routineQuery.lean().exec();
