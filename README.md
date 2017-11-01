@@ -4,8 +4,6 @@
 
 ## About
 
-This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
-
 ## Getting Started
 
 Getting up and running is as easy as 1, 2, 3.
@@ -28,13 +26,19 @@ Getting up and running is as easy as 1, 2, 3.
 Simply run `npm test` and all your tests in the `test/` directory will be run.
 
 ## Installed packages
+npm install --save mongoose
+npm install --save restify
+npm install --save restify-plugins
+
+npm install --save-dev nodemon
+npm install --save mongoose-deep-populate
+npm install --save-dev mocha
+
+
+
+## Old
 npm install --save-dev babel-cli
 npm install --save-dev babel-preset-es2017
-npm install --save-dev nodemon
-
-npm install --save mongoose-deep-populate
-
-npm install --save-dev mocha
 npm install --save-dev babel-register
 
 ##Setup development

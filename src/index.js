@@ -1,5 +1,6 @@
 //from restify-mongoose
 var restify = require('restify');
+var plugins = require('restify-plugins');
 var restifyMongoose = require('restify-mongoose');
 var mongoose = require('mongoose');
 let exerciseModel = require('./models/exercise.model.js');
@@ -28,9 +29,9 @@ var server = restify.createServer({
     version: '1.0.0'
 });
  
-server.use(restify.acceptParser(server.acceptable));
-server.use(restify.queryParser());
-server.use(restify.bodyParser());
+server.use(plugins.acceptParser(server.acceptable));
+server.use(plugins.queryParser());
+server.use(plugins.bodyParser());
  
 
 // Now create a restify-mongoose resource from 'Note' mongoose model 
@@ -99,7 +100,7 @@ async function getExercise(req, res, next) {
 //MongoDBUtils.restore(MONGODB_REMOTE_API);
 
 
-server.get(/\/?.*/, restify.serveStatic({
+server.get(/\/?.*/, plugins.serveStatic({
             directory: __dirname,
             default: '../public/index.html',
             match: /^((?!index.js).)*$/   // we should deny access to the application source
