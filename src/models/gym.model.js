@@ -141,6 +141,22 @@ class Gym {
             }
         }
     }
+
+    async initializeNewField() {
+        let ExerciseModel = exercise.getModel();
+        let exercisesQuery = ExerciseModel.find({});
+        let exercises = await exercisesQuery.exec();
+        for(let e of exercises){
+            if (e.muscleGroup === undefined) {
+                e.muscleGroup = "1";
+                e.save();
+                //console.log(e);
+            }
+        }
+        //await exercisesQuery.save();
+        //let exercise = await new ExerciseModel({name: exerciseName, series: []}).save();
+        //routine.exercises.push(exercise._id);
+    }
 }
 
 

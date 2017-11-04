@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 
 var exerciseSchema = new mongoose.Schema({
     name : { type : String, required : true },
+    muscleGroup: { type: String, required: true},
     series : [{type: mongoose.Schema.Types.ObjectId, ref: 'serie'}],
     //lastUpdated: Date  //last date of creation of the series
    }, {timestamps: true});
