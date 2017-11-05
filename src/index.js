@@ -100,6 +100,7 @@ async function getExercise(req, res, next) {
 //MongoDBUtils.backup(MONGODB_REMOTE_API);
 //MongoDBUtils.restore(MONGODB_REMOTE_API);
 //MongoDBUtils.restore(MONGODB_LOCAL_API);
+//MongoDBUtils.backup(MONGODB_LOCAL_API);
 
 
 server.get(/\/?.*/, plugins.serveStatic({

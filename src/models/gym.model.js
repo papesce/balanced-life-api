@@ -101,6 +101,8 @@ class Gym {
         if (exerciseResult.series.length > 0) {
             exerciseResult.series.sort((s1,s2) => {return s1.createdAt < s2.createdAt});
             exerciseResult.lastUpdated = exerciseResult.series[0].createdAt;
+            exerciseResult.lastReps = exerciseResult.series[0].reps;
+            exerciseResult.lastWeight = exerciseResult.series[0].weight;
         //} else {
         //    exerciseResult.lastUpdated = exerciseResult.createdAt;
         }
@@ -135,9 +137,13 @@ class Gym {
                 exerciseResult.series.sort((s1,s2) => {return s1.createdAt < s2.createdAt});
                 exerciseResult.lastUpdated = exerciseResult.series[0].createdAt;
                 let newSeries = exerciseResult.series.map((serie) => serie._id);
+                exerciseResult.lastReps = exerciseResult.series[0].reps;
+                exerciseResult.lastWeight = exerciseResult.series[0].weight;
                 exerciseResult.series = newSeries;
             } else {
                 exerciseResult.lastUpdated = exerciseResult.createdAt;
+                exerciseResult.lastReps = 0;
+                exerciseResult.lastWeight = 0;
             }
         }
     }
