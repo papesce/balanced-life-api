@@ -116,6 +116,8 @@ class Gym {
          let routines = await routinesQuery.lean().exec();
          for (let routineResult of routines) {
             this.addLastUpdated(routineResult);
+            //sort exercises by muscleGroup
+            routineResult.exercises.sort((e1,e2) => e1.muscleGroup > e2.muscleGroup);
          }
     return routines;
      }
@@ -127,6 +129,8 @@ class Gym {
         deepPopulate('exercises.series');
         let routineResult = await routineQuery.lean().exec();
         this.addLastUpdated(routineResult);
+        //sort exercises by muscleGroup
+        routineResult.exercises.sort((e1,e2) => e1.muscleGroup > e2.muscleGroup);
         return routineResult;
     }
 
