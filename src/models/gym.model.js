@@ -90,7 +90,7 @@ class Gym {
         let ex = await ExerciseModel.findById(exerciseId).exec();
         ex.series.push(newSerie);
         ex.lastUpdated = newSerie.createdAt;
-        ex.target = '';
+        if (!ex.target) ex.target = '';
         await ex.save();   
         return newSerie;
     }
