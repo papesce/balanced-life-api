@@ -5,11 +5,11 @@
 class Gym {
     initializeModels() {
         let ExerciseModel = exercise.getModel();
-        let RoutineModel = new routine().getModel();
+        let RoutineModel = routine.getModel();
         let SerieModel = serie.getModel();
         //this.initializeRoutine1(ExerciseModel, RoutineModel, SerieModel);
         ///this.initializeRoutine2(ExerciseModel, RoutineModel, SerieModel);
-        this.initializeRoutine3(ExerciseModel, RoutineModel, SerieModel);
+        //this.initializeRoutine2(ExerciseModel, RoutineModel, SerieModel);
     }
 
     async initializeRoutine1(ExerciseModel, RoutineModel, SerieModel) {
@@ -31,7 +31,7 @@ class Gym {
     async initializeRoutine2(ExerciseModel, RoutineModel, SerieModel) {
         let routineName = "Legs Shoulders Cabs";
         //let routine = await this.createRoutine(RoutineModel, routineName);
-        let routine = await this.getRoutine(RoutineModel, routineName);
+        let routine = await this.getRoutineByName(RoutineModel, routineName);
         // await this.addExercise(routine, ExerciseModel, "Barbell Squats Long");
         // await this.addExercise(routine, ExerciseModel, "Standing Military Press (short)");
         // await this.addExercise(routine, ExerciseModel, "One Leg Dumbbell Raising Out");
@@ -41,26 +41,29 @@ class Gym {
         // await this.addExercise(routine, ExerciseModel, "Stiff Legged Deadlift (long)");
         // await this.addExercise(routine, ExerciseModel, "Standing Dumbbell Front Raise (alt)");
         // await this.addExercise(routine, ExerciseModel, "One Leg Dumbbel Rasing In");
-        // await routine.save();
+        //await this.addExercise(routine, ExerciseModel, "Leg Extensions", "Thighs", "Cuadriceps");
+        //await this.addExercise(routine, ExerciseModel, "Good Morning", "Thighs", "Hamstrings");
+        //await this.addExercise(routine, ExerciseModel, "Lying Leg Curls", "Thighs", "Hamstrings");
+        //await routine.save();
     }
 
     async initializeRoutine3(ExerciseModel, RoutineModel, SerieModel) {
         let routineName = "Back Biceps Abs";
-        let routine = await this.createRoutine(RoutineModel, routineName);
+        //let routine = await this.createRoutine(RoutineModel, routineName);
         //let routine = await this.getRoutine(RoutineModel, routineName);
-        await this.addExercise(routine, ExerciseModel, "Deadlift");
-        await this.addExercise(routine, ExerciseModel, "Barbell Curls (short)");
-        await this.addExercise(routine, ExerciseModel, "Raised Knee Barbell Crunches (short)");
-        await this.addExercise(routine, ExerciseModel, "One-Arm Dumbbell Rows");
-        await this.addExercise(routine, ExerciseModel, "Concentration curls");
-        await this.addExercise(routine, ExerciseModel, "Oblique Crunch with bench");
-        await this.addExercise(routine, ExerciseModel, "Bent Over Barbell Rows long (rev grip)");
-        await this.addExercise(routine, ExerciseModel, "Hammer Standing Dumbbell Curls");
-        await this.addExercise(routine, ExerciseModel, "Flat Bench Reverse crunch (knee up)");
-        await this.addExercise(routine, ExerciseModel, "Flat bench Leg Raises (hands down)");
-        await this.addExercise(routine, ExerciseModel, "Supinating Curl Standing");
-        await this.addExercise(routine, ExerciseModel, "Calves over bench sit ups (with dumbell)");
-        await routine.save();
+        // await this.addExercise(routine, ExerciseModel, "Deadlift");
+        // await this.addExercise(routine, ExerciseModel, "Barbell Curls (short)");
+        // await this.addExercise(routine, ExerciseModel, "Raised Knee Barbell Crunches (short)");
+        // await this.addExercise(routine, ExerciseModel, "One-Arm Dumbbell Rows");
+        // await this.addExercise(routine, ExerciseModel, "Concentration curls");
+        // await this.addExercise(routine, ExerciseModel, "Oblique Crunch with bench");
+        // await this.addExercise(routine, ExerciseModel, "Bent Over Barbell Rows long (rev grip)");
+        // await this.addExercise(routine, ExerciseModel, "Hammer Standing Dumbbell Curls");
+        // await this.addExercise(routine, ExerciseModel, "Flat Bench Reverse crunch (knee up)");
+        // await this.addExercise(routine, ExerciseModel, "Flat bench Leg Raises (hands down)");
+        // await this.addExercise(routine, ExerciseModel, "Supinating Curl Standing");
+        // await this.addExercise(routine, ExerciseModel, "Calves over bench sit ups (with dumbell)");
+        // await routine.save();
     }
    
     async createRoutine(RoutineModel, routineName) {
@@ -68,13 +71,13 @@ class Gym {
         return routine;
     }
 
-    async getRoutine(RoutineModel, routineName) {
+    async getRoutineByName(RoutineModel, routineName) {
         let routine = await RoutineModel.findOne({name: routineName});
         return routine;
     }
 
-    async addExercise(routine, ExerciseModel, exerciseName) {
-        let exercise = await new ExerciseModel({name: exerciseName, series: []}).save();
+    async addExercise(routine, ExerciseModel, exerciseName, muscleGroup, target) {
+        let exercise = await new ExerciseModel({name: exerciseName, series: [], muscleGroup: muscleGroup, target: target}).save();
         routine.exercises.push(exercise._id);
     }
 
@@ -109,6 +112,10 @@ class Gym {
         return exerciseResult;
     }
 
+    sortByMuscleGroup(e1,e2) {
+        return e1.muscleGroup.localeCompare(e2.muscleGroup);
+    }
+
     async getRoutines() {
          let RoutineModel = routine.getModel();
          let routinesQuery = RoutineModel.find().
@@ -117,7 +124,7 @@ class Gym {
          for (let routineResult of routines) {
             this.addLastUpdated(routineResult);
             //sort exercises by muscleGroup
-            routineResult.exercises.sort((e1,e2) => e1.muscleGroup > e2.muscleGroup);
+            routineResult.exercises.sort(this.sortByMuscleGroup);
          }
     return routines;
      }
@@ -130,7 +137,7 @@ class Gym {
         let routineResult = await routineQuery.lean().exec();
         this.addLastUpdated(routineResult);
         //sort exercises by muscleGroup
-        routineResult.exercises.sort((e1,e2) => e1.muscleGroup > e2.muscleGroup);
+        routineResult.exercises.sort(this.sortByMuscleGroup);
         return routineResult;
     }
 
