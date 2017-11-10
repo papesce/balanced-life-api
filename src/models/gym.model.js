@@ -148,7 +148,8 @@ class Gym {
             if (exerciseResult.series.length > 0) {
                 exerciseResult.series.sort((s1,s2) => {return s1.createdAt < s2.createdAt});
                 exerciseResult.lastUpdated = exerciseResult.series[0].createdAt;
-                let newSeries = exerciseResult.series.map((serie) => serie._id);
+                let newSeries = exerciseResult.series.map((serie) => {return {_id: serie._id}});
+                //exerciseResult.seriesSize = newSeries.length;
                 exerciseResult.lastReps = exerciseResult.series[0].reps;
                 exerciseResult.lastWeight = exerciseResult.series[0].weight;
                 exerciseResult.series = newSeries;
