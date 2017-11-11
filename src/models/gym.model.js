@@ -90,7 +90,9 @@ class Gym {
         let ex = await ExerciseModel.findById(exerciseId).exec();
         ex.series.push(newSerie);
         ex.lastUpdated = newSerie.createdAt;
+        //temporary hack"
         if (!ex.target) ex.target = 'to complete';
+        if (!ex.gifURL) ex.gifURL = 'http://www.exrx.net/AnimatedEx/GluteusMaximus/BBHipThrust.gif'
         await ex.save();   
         return newSerie;
     }
