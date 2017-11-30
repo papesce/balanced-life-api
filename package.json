@@ -19,7 +19,8 @@
   "bugs": {},
   "scripts": {
     "watch": "nodemon src/",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "start:prod" : "NODE_ENV=production npm start"
   },
   "dependencies": {
     "mongodb-backup": "1.6.9",

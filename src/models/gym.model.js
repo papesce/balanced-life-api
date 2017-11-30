@@ -33,47 +33,60 @@ class Gym {
         //let routine = await this.createRoutine(RoutineModel, routineName);
         //let routine = await this.getRoutineByName(RoutineModel, routineName);
         // await this.addExercise(routine, ExerciseModel, "Barbell Squats Long");
-        await this.editExercise("Barbell Squats Long", "Quadriceps", "http://www.exrx.net/AnimatedEx/Quadriceps/BBSquatHigh.gif");
+        //await this.editExercise("Barbell Squats Long", "Quadriceps", "http://www.exrx.net/AnimatedEx/Quadriceps/BBSquatHigh.gif");
         // await this.addExercise(routine, ExerciseModel, "Standing Military Press (short)");
         // await this.addExercise(routine, ExerciseModel, "One Leg Dumbbell Raising Out");
-        await this.editExercise("One Leg Dumbbell Raising Out","Gastrocnemius", "http://www.exrx.net/AnimatedEx/Gastrocnemius/DBSingleLegCalfRaise.gif");
+        //await this.editExercise("One Leg Dumbbell Raising Out","Gastrocnemius", "http://www.exrx.net/AnimatedEx/Gastrocnemius/DBSingleLegCalfRaise.gif");
         // await this.addExercise(routine, ExerciseModel, "Dumbel Lunges (alt)");
         // await this.addExercise(routine, ExerciseModel, "Standing Dumbbell Side Laterals");
-        await this.editExercise("Standing Dumbbell Side Laterals", "Deltoid, Lateral", "http://www.exrx.net/AnimatedEx/DeltoidLateral/DBLateralRaise.gif");
+        //await this.editExercise("Standing Dumbbell Side Laterals", "Deltoid, Lateral", "http://www.exrx.net/AnimatedEx/DeltoidLateral/DBLateralRaise.gif");
         //await this.addExercise(routine, ExerciseModel, "One Leg Dumbbell Raising");
-        await this.editExercise("One Leg Dumbbell Calf Raising","Gastrocnemius", "http://www.exrx.net/AnimatedEx/Gastrocnemius/DBSingleLegCalfRaise.gif");
+        //await this.editExercise("One Leg Dumbbell Calf Raising","Gastrocnemius", "http://www.exrx.net/AnimatedEx/Gastrocnemius/DBSingleLegCalfRaise.gif");
         // await this.addExercise(routine, ExerciseModel, "Stiff Legged Deadlift (long)");
         // await this.addExercise(routine, ExerciseModel, "Standing Dumbbell Front Raise (alt)");
-        await this.editExercise("Standing Dumbbell Front Raise (alt)", "Deltoid, Anterior", "http://www.exrx.net/AnimatedEx/DeltoidAnterior/DBFrontRaise.gif");
+        //await this.editExercise("Standing Dumbbell Front Raise (alt)", "Deltoid, Anterior", "http://www.exrx.net/AnimatedEx/DeltoidAnterior/DBFrontRaise.gif");
         // await this.addExercise(routine, ExerciseModel, "One Leg Dumbbel Rasing In");
-        await this.editExercise("One Leg Dumbbel Rasing In","Gastrocnemius", "http://www.exrx.net/AnimatedEx/Gastrocnemius/DBSingleLegCalfRaise.gif");
+        //await this.editExercise("One Leg Dumbbel Rasing In","Gastrocnemius", "http://www.exrx.net/AnimatedEx/Gastrocnemius/DBSingleLegCalfRaise.gif");
         //await this.addExercise(routine, ExerciseModel, "Leg Extensions", "Thighs", "Cuadriceps");
+        //await this.editExercise("Leg Extensions", "Cuadriceps", "http://www.exrx.net/AnimatedEx/Quadriceps/LVLegExtension.gif");
         //await this.addExercise(routine, ExerciseModel, "Good Morning", "Thighs", "Hamstrings");
-        await this.editExercise("Good Morning", "Hamstrings", "http://www.exrx.net/AnimatedEx/Hamstrings/BBGoodMorning.gif");
+        //await this.editExercise("Good Morning", "Hamstrings", "http://www.exrx.net/AnimatedEx/Hamstrings/BBGoodMorning.gif");
         //await this.addExercise(routine, ExerciseModel, "Lying Leg Curls", "Thighs", "Hamstrings");
-        await this.editExercise("Lying Leg Curls", "Hamstrings", "http://www.exrx.net/AnimatedEx/Hamstrings/LVLyingLegCurl.gif");
+        //await this.editExercise("Lying Leg Curls", "Hamstrings", "http://www.exrx.net/AnimatedEx/Hamstrings/LVLyingLegCurl.gif");
         //await routine.save();
     }
 
     async initializeRoutine3(ExerciseModel, RoutineModel, SerieModel) {
         let routineName = "Back Biceps Abs";
         //let routine = await this.createRoutine(RoutineModel, routineName);
-        let routine = await this.getRoutineByName(RoutineModel, routineName);
+        //let routine = await this.getRoutineByName(RoutineModel, routineName);
         // await this.addExercise(routine, ExerciseModel, "Deadlift");
         // await this.addExercise(routine, ExerciseModel, "Barbell Curls (short)");
         // await this.addExercise(routine, ExerciseModel, "Raised Knee Barbell Crunches (short)");
         // await this.addExercise(routine, ExerciseModel, "One-Arm Dumbbell Rows");
+        //await this.editExercise("One-Arm Dumbbell Rows", "Back General", "http://www.exrx.net/AnimatedEx/BackGeneral/DBBentoverRow.gif");
         // await this.addExercise(routine, ExerciseModel, "Concentration curls");
         // await this.addExercise(routine, ExerciseModel, "Oblique Crunch with bench");
         // await this.addExercise(routine, ExerciseModel, "Bent Over Barbell Rows long (rev grip)");
         // await this.addExercise(routine, ExerciseModel, "Hammer Standing Dumbbell Curls");
+        //await this.editExercise("Hammer Standing Dumbbell Curls", "Brachioradialis", "http://www.exrx.net/AnimatedEx/Brachioradialis/DBHammerCurl.gif");
         // await this.addExercise(routine, ExerciseModel, "Flat Bench Reverse crunch (knee up)");
+        //await this.rename("Flat bench Leg Raises (hands down)", "Lying Straight Leg Raise");
         // await this.addExercise(routine, ExerciseModel, "Flat bench Leg Raises (hands down)");
+        //await this.editExercise("Lying Straight Leg Raise", "LLiopsoas", "http://www.exrx.net/AnimatedEx/HipFlexors/BWLyingStraightLegRaise.gif");
         // await this.addExercise(routine, ExerciseModel, "Supinating Curl Standing");
-        // await this.addExercise(routine, ExerciseModel, "Calves over bench sit ups (with dumbell)");
+        //await this.editExercise("Supinating Curl Standing", "Biceps Brachii", "http://www.exrx.net/AnimatedEx/Biceps/DBCurl.gif");
+        // await this.addExercise(routine, ExerciseModel, "Barbell Push Sit-up");
+        //await this.renameExercise("Calves over bench sit ups (with dumbell)", "Barbell Push Sit-up");
          //await this.addExercise(routine, ExerciseModel, "Dumbbell Shoulder Internal Rotation (on bench)",
          //"Back", "Subscapularis", "http://www.exrx.net/AnimatedEx/Subscapularis/DBInternalRotation.gif");
-         await routine.save();
+        //await this.addExercise(routine, ExerciseModel, "Barbell Pullover", "Back", "Latissimus Dorsi","http://www.exrx.net/AnimatedEx/LatissimusDorsi/BBPullover.gif");
+        //await this.addExercise(routine, ExerciseModel, "Dumbell Push Crush", "Waist", "Rectus Abdominis", "http://www.exrx.net/AnimatedEx/RectusAbdominis/DBPushCrunch.gif");
+        //await this.addExercise(routine, ExerciseModel, "Weighted Crunch", "Waist", "Rectus Abdominis", "http://www.exrx.net/AnimatedEx/RectusAbdominis/WTCrunch.gif");
+        //await routine.save();
+
+        
+
     }
    
     async createRoutine(RoutineModel, routineName) {
