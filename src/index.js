@@ -46,8 +46,10 @@ var routine = restifyMongoose(routineModel.getModel());
 // Serve resource notes with fine grained mapping control 
 //server.get('/routine', routine.query({populate: "exercises"}));
 server.get('/routine', getRoutines);
+server.get('/routine2', getRoutines2);
 //server.get('/routine/:id', routine.detail({populate: "exercises"}));
 server.get('/routine/:id', getRoutine);
+server.get('/routine2/:id', getRoutine2);
 //server.post('/routine', routine.insert());
 //server.patch('/routine/:id', routine.update());
 //server.del('/routine/:id', routine.remove());
@@ -83,8 +85,18 @@ async function getRoutines(req, res, next) {
     res.send(routines);
 }
 
+async function getRoutines2(req, res, next) {
+    let routines = await gym.getRoutines2();
+    res.send(routines);
+}
+
 async function getRoutine(req, res, next) {
     let routine = await gym.getRoutine(req.params.id);
+    res.send(routine);
+}
+
+async function getRoutine2(req, res, next) {
+    let routine = await gym.getRoutine2(req.params.id);
     res.send(routine);
 }
 
@@ -103,7 +115,7 @@ gym.initializeModels();
 //gym.initializeNewField();
 
 //database backup/restore
-MongoDBUtils.backup(MONGODB_REMOTE_API);
+//MongoDBUtils.backup(MONGODB_REMOTE_API);
 //MongoDBUtils.restore(MONGODB_REMOTE_API);
 //MongoDBUtils.restore(MONGODB_LOCAL_API);
 //MongoDBUtils.backup(MONGODB_LOCAL_API);

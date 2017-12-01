@@ -5,22 +5,22 @@
 var mongoose = require('mongoose');
 
 var serieSchema = new mongoose.Schema({
-    reps: Number,
-    weight: Number 
-   }, {timestamps: true});
+  reps: Number,
+  weight: Number 
+}, {timestamps: true});
 
 var serieModel = mongoose.model('serie', serieSchema);
 
 class Serie {
 
 // Create a simple mongoose model 'Note' 
- static getModel() {
-   return serieModel;
- }
+  static getModel() {
+    return serieModel;
+  }
 
- static getSchema() {
-   return serieSchema;
- }
+  static getSchema() {
+    return serieSchema;
+  }
   
 };
 

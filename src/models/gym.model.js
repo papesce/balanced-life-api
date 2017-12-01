@@ -167,6 +167,20 @@ class Gym {
     return routines;
      }
 
+     async getRoutines2() {
+        let RoutineModel = routine.getModel();
+        let routinesQuery = RoutineModel.find().
+        deepPopulate('exercises.series');
+        let routines = await routinesQuery.lean().exec();
+        for (let routineResult of routines) {
+           this.addLastUpdated(routineResult);
+           //sort exercises by muscleGroup
+           //routineResult.exercises.sort(this.sortByMuscleGroup);
+           this.groupByMuscleGroup(routineResult);
+        }
+   return routines;
+    }
+
      async getRoutine(routineId) {
          //bug fix case of routine not found
         let RoutineModel = routine.getModel();
@@ -178,6 +192,39 @@ class Gym {
         routineResult.exercises.sort(this.sortByMuscleGroup);
         return routineResult;
     }
+
+    async getRoutine2(routineId) {
+        //bug fix case of routine not found
+       let RoutineModel = routine.getModel();
+       let routineQuery = RoutineModel.findOne({_id : routineId}).
+       deepPopulate('exercises.series');
+       let routineResult = await routineQuery.lean().exec();
+       this.addLastUpdated(routineResult);
+       this.groupByMuscleGroup(routineResult);
+       //sort exercises by muscleGroup
+       //routineResult.exercises.sort(this.sortByMuscleGroup);
+       return routineResult;
+   }
+
+   groupByMuscleGroup(routineResult) {
+       let newExercises = {};
+       routineResult.exercises.forEach(exercise => {
+           let muscleGroup = exercise.muscleGroup;
+        if (!newExercises[muscleGroup]) {
+            newExercises[muscleGroup] = [];
+        }
+           newExercises[muscleGroup].push(exercise);
+       });
+       routineResult.exercises = [];
+       routineResult.groupedExercises = []
+       for(let key in newExercises){
+           routineResult.groupedExercises.push({
+                muscleGroup : key,
+                exercises : newExercises[key]
+            })
+        }
+   }
+
 
 
     addLastUpdated(routineResult){
